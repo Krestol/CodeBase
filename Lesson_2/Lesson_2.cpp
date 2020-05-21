@@ -21,7 +21,6 @@ int __cdecl _tmain(int argc, TCHAR *argv[])
 
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
-		DisplayError(TEXT("CreateFile"));
 		_tprintf(TEXT("Terminal failure: Unable to open file \"%s\" for write.\n"), argv[1]);
 		return 1;
 	}
@@ -35,7 +34,6 @@ int __cdecl _tmain(int argc, TCHAR *argv[])
 
 	if (FALSE == bErrorFlag)
 	{
-		DisplayError(TEXT("WriteFile"));
 		printf("Terminal failure: Unable to write to file.\n");
 	}
 	else
