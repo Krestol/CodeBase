@@ -1,0 +1,8 @@
+﻿  Lesson_3.cpp
+d:\codebase\lesson_1\lesson_3\lesson_3.cpp(17): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'wchar_t *'
+  d:\codebase\lesson_1\lesson_3\lesson_3.cpp(17): note: consider using '%ls' in the format string
+  d:\codebase\lesson_1\lesson_3\lesson_3.cpp(17): note: consider using '%lls' in the format string
+  d:\codebase\lesson_1\lesson_3\lesson_3.cpp(17): note: consider using '%Ls' in the format string
+  d:\codebase\lesson_1\lesson_3\lesson_3.cpp(17): note: consider using '%ws' in the format string
+  Lesson_3.vcxproj -> D:\CodeBase\Lesson_1\Debug\Lesson_3.exe
+  Lesson_3.vcxproj -> D:\CodeBase\Lesson_1\Debug\Lesson_3.pdb (Full PDB)
