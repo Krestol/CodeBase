@@ -1,0 +1,27 @@
+void CreateVector(size_t size, std::vector<int>& targetVector)
+{	
+	while (size > 0)
+	{
+		targetVector.push_back(rand() % 1000);
+		--size;
+	}
+}
+
+int FindMaxMultiple(int multiple, const std::vector<int>& data)
+{
+	if (data.empty())
+	{
+		throw std::exception("Empty vector");
+	}
+
+	int max = data[0];
+	for (int i : data)
+	{
+		if (i > max && i % multiple == 0)
+		{
+			max = i;
+		}
+	}
+
+	return max;
+}
