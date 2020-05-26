@@ -47,3 +47,7 @@ void CreateVectorAndFindMaxMultiple(int multiple)
 		std::cerr << ex.what();
 	}
 }
+
+
+
+//thread function DWORD WINAPI func(void* multiple)
