@@ -32,3 +32,18 @@ int FindMaxMultiple(int multiple, const std::vector<int>& data)
 
 	return max;
 }
+
+void CreateVectorAndFindMaxMultiple(int multiple)
+{
+	std::vector<int> data;
+	CreateVector(1000000, data);
+	std::cout << std::endl;
+	try
+	{
+		std::cout << "Multiple: " << multiple << "; Max: " << FindMaxMultiple(multiple, data);
+	}
+	catch (const std::exception& ex)
+	{
+		std::cerr << ex.what();
+	}
+}
