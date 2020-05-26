@@ -1,3 +1,10 @@
+//#include <stdio.h>
+//#include <tchar.h>
+//#include <vector>
+//#include <time.h> 
+//#include <iostream>
+//#include <windows.h>
+
 void CreateVector(size_t size, std::vector<int>& targetVector)
 {	
 	while (size > 0)
