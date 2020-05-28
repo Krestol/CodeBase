@@ -1,0 +1,36 @@
+/*=========Имитация сложной работы=========*/
+struct HardStruct
+{
+	int n;
+	char data_[10000];
+};
+
+// Предикат для сортировки
+bool Less(const HardStruct& left, const HardStruct& right)
+{
+	return left.n < right.n;
+}
+
+void GetHardVector(size_t vectorSize, std::vector<HardStruct>& hardVector)
+{
+	hardVector.empty();
+	for (int i = 0; i < vectorSize; ++i)
+	{
+		HardStruct someData;
+		someData.n = rand() % vectorSize;
+		hardVector.push_back(someData);
+	}
+}
+
+void HardWork()
+{
+	uint64_t level = 10000;
+	std::vector<HardStruct> hugeData;
+	GetHardVector(level, hugeData);
+
+	std::sort(hugeData.begin(), hugeData.end(), Less); // сортировка с использованием stl
+}
+
+//Потребуются такие заголовочные файлы
+#include <vector>    // для std::vector
+#include <algorithm> // для std::sort

@@ -1,0 +1,18 @@
+/*=========CRITICAL_SECTION=========*/
+CRITICAL_SECTION criticalSection;
+//Перед использованием объект критической секции нужно инициализировать
+InitializeCriticalSection(&criticalSection);
+//когда необходимости в объекте критической секции больше нет, его нужно удалить
+DeleteCriticalSection(&g_resultTableCriticalSection);
+
+// Работа с разделямыми между потоками ресурсами
+EnterCriticalSection(&criticalSection);
+/*
+ Do some work
+*/
+
+// Другие потоки не смогут захватить критическую секцию, 
+// до тех пор, пока текущий поток не освободит ее
+LeaveCriticalSection(&criticalSection);
+
+https://docs.microsoft.com/uk-ua/windows/win32/api/synchapi/nf-synchapi-initializecriticalsection?redirectedfrom=MSDN

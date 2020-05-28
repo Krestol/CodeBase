@@ -1,0 +1,30 @@
+/*=========Функции для работы с консолью=========*/
+//Получить хендл потока вывода
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+
+//Установить текущее положение курсора
+COORD coordinates;
+coordinates.X = 0;
+coordinates.Y = 0;
+SetConsoleCursorPosition(hConsole, coordinates);
+std::cout << 'a' // выведется в заданных координатах
+
+
+//Получить текущее положение курсора
+CONSOLE_SCREEN_BUFFER_INFO screenBuffInfo;
+GetConsoleScreenBufferInfo(hConsole, &screenBuffInfo);
+screenBuffInfo.dwCursorPosition
+
+
+//Можно убрать мерцание курсора
+CONSOLE_CURSOR_INFO cursorInfo;
+GetConsoleCursorInfo(hConsole, &cursorInfo);
+cursorInfo.bVisible = false;
+SetConsoleCursorInfo(hConsole, &cursorInfo);
+
+//Изменить цвет текста
+SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+
