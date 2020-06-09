@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,15 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoSchool.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CarFactory.cpp" />
     <ClCompile Include="Driver.cpp" />
+    <ClCompile Include="DriverManager.cpp" />
     <ClCompile Include="SmartPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutoSchool.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="CarFactory.h" />
     <ClInclude Include="Driver.h" />
+    <ClInclude Include="DriverManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

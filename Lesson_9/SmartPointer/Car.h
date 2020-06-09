@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <vector>
+#include <Windows.h>
+#include <thread>
 
 class Car
 {

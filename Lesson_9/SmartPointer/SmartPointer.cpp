@@ -1,27 +1,11 @@
-#include "Driver.h"
+#include "AutoSchool.h"
 
 int main()
 {
     std::shared_ptr<CarFactory> factory(new CarFactory());
-    Driver driver1("Bob", factory);
-    driver1.Go();
+    std::shared_ptr<DriverManager> manager(new DriverManager());
+    std::unique_ptr<AutoSchool> school(new AutoSchool(manager, factory));
 
-    driver1.BuyCar("red");
-    driver1.Go();
-
-    driver1.BuyCar("blue");
-    driver1.Go();
-    
-
-    Driver driver2("Sam", factory);
-    driver2.Go();
-
-    driver2.BuyCar("red");
-    driver2.Go();
-
-    driver2.BuyCar("blue");
-    driver2.Go();
-
-
+    Sleep(1000000);
     return 0;
 }
