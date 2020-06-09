@@ -1,3 +1,8 @@
+#include "stdafx.h"
+#include "Car.h"
+#include "Driver.h"
+#include "CarFactory.h"
+#include "DriverManager.h"
 #include "AutoSchool.h"
 
 int main()

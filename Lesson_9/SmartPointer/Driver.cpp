@@ -2,31 +2,7 @@
 
 void Go(Driver* driver)
 {
-    unsigned int start = clock();
-    while (true)
-    {
-        if (driver->GetCar() != nullptr)
-        {
-            std::cout << driver->GetName() << " I have a car ";
-            driver->GetCar()->Drive();
-        }
-        else
-        {
-            std::cout << driver->GetName() << ": I'll go on foot\n";
-        }
-        Sleep(1000);
-        unsigned int end = clock();
-        if ((end - start) > 5000 && *driver->GetWhatCar() == WhatCar::NoCar)
-        {
-            driver->BuyCar("(b/y)red");
-            *driver->GetWhatCar() = WhatCar::BY;
-        }
-        else if ((end - start) > 10000 && *driver->GetWhatCar() == WhatCar::BY)
-        {
-            driver->BuyCar("green");
-            *driver->GetWhatCar() = WhatCar::New;
-        }
-    }
+    
 }
 
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
@@ -35,11 +11,7 @@ Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
 {
     whatCar_ = WhatCar::NoCar;
     work_ = false;
-}
-
-std::shared_ptr<Car> Driver::GetCar()
-{
-    return car_;
+    readyToSale_ = false;
 }
 
 std::string Driver::GetName()
@@ -57,11 +29,62 @@ WhatCar* Driver::GetWhatCar()
     return &whatCar_;
 }
 
+bool Driver::GetWorkStatus()
+{
+    return work_;
+}
+
+bool Driver::IfReady()
+{
+    return readyToSale_;
+}
+
+void Driver::ReadyToSell()
+{
+    carToSale_ = std::move(car_);
+
+}
+
+std::unique_ptr<Car> Driver::SellCar()
+{
+    return std::unique_ptr<Car>(carToSale_.release());
+    BuyCar("green");
+}
+
+void Driver::BuyUsedCar(std::shared_ptr<Driver> driver)
+{
+    if (driver != nullptr)
+    {
+        car_ = std::move(driver->SellCar());
+    }
+}
+
 void Driver::Start()
 {
-    if (!work_)
+    work_ = true;
+    unsigned int start = clock();
+    while (true)
     {
-        thread_ = std::make_unique<std::thread>(Go, this);
-        work_ = true;
+        unsigned int end = clock();
+        if ((end - start) > 5000 && whatCar_ == WhatCar::NoCar)
+        {
+            this->BuyCar("(b/y)red");
+            whatCar_ = WhatCar::BY;
+        }
+        else if ((end - start) > 10000 && whatCar_ == WhatCar::BY)
+        {
+            this->BuyCar("green");
+            whatCar_ = WhatCar::New;
+        }
+        if (car_ != nullptr)
+        {
+            std::cout << name_ << " I have a car ";
+            car_->Drive();
+        }
+        else
+        {
+            std::cout << name_ << ": I'll go on foot\n";
+        }
+        Sleep(1000);
     }
 }

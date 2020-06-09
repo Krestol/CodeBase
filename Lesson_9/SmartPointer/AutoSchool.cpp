@@ -6,7 +6,11 @@ void StartSchool(AutoSchool* school)
 	{
 		Sleep(5000);
 		std::shared_ptr<Driver> driver = std::make_shared<Driver>("Bob #" + std::to_string(school->IncrProd()), school->GetFactory());
-		school->GetManager()->AddDriver(driver);
+		if (!driver->GetWorkStatus())
+		{
+			std::shared_ptr<std::thread> thread = std::make_shared<std::thread>(&Driver::Start, driver);
+			school->GetManager()->AddDriver(driver, thread);
+		}
 	}
 }
 

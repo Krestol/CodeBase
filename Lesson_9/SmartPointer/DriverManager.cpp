@@ -1,38 +1,19 @@
 #include "DriverManager.h"
 
-void RunDriver(DriverManager* manager)
-{
-	while (true)
-	{
-		WaitForSingleObject(manager->GetEvent(), INFINITE);
-		manager->StartDriver();
-	}
-}
-
-DriverManager::DriverManager()
-{
-	g_event_ = CreateEvent(
-		NULL,
-		FALSE,
-		FALSE,
-		NULL
-	);
-	thread_ = std::make_unique<std::thread>(RunDriver, this);
-}
-
-void DriverManager::AddDriver(std::shared_ptr<Driver> driver)
+void DriverManager::AddDriver(std::shared_ptr<Driver> driver, std::shared_ptr<std::thread> thread)
 {
 	drivers_.push_back(driver);
-	SetEvent(g_event_);
+	driversthreads_.push_back(thread);
 }
 
-void DriverManager::StartDriver()
+std::shared_ptr<Driver> DriverManager::WhoIsReadyToSale()
 {
-	drivers_.back()->Start();
+	for (auto& driver : drivers_)
+	{
+		if (driver->IfReady())
+		{
+			return driver;
+		}
+	}
+	return nullptr;
 }
-
-HANDLE DriverManager::GetEvent()
-{
-	return g_event_;
-}
-

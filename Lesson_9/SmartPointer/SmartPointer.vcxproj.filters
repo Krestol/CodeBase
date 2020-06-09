@@ -27,10 +27,10 @@
     <ClCompile Include="Driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DriverManager.cpp">
+    <ClCompile Include="AutoSchool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutoSchool.cpp">
+    <ClCompile Include="DriverManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,13 @@
     <ClInclude Include="Driver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DriverManager.h">
+    <ClInclude Include="AutoSchool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutoSchool.h">
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DriverManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
