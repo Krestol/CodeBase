@@ -4,5 +4,5 @@
 
 std::unique_ptr<Car> CarFactory::BuildCar(const std::string& color)
 {
-        return std::make_unique<Car>(new Car(color));
+        return std::make_unique<Car>(color);
 }
