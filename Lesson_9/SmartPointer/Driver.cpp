@@ -14,6 +14,17 @@ void Driver::BuyCar(const std::string& color)
     car_ = factory_->BuildCar(color);
 }
 
+std::unique_ptr<Car> Driver::SellCar()
+{
+    return std::make_unique<Car>(car_.release());
+}
+
+void Driver::BuyUsedCar(Driver * d)
+{
+    car_.reset();
+    d->SellCar();
+}
+
 void Driver::Go()
 {
     if (car_ != nullptr)

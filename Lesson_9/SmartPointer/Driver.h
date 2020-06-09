@@ -1,6 +1,6 @@
 #pragma once
-class CarFactory{};
-class Car{};
+#include "Car.h"
+class CarFactory;
 
 class Driver
 {
@@ -9,8 +9,8 @@ public:
 
     void BuyCar(const std::string& color);
 
-    // SellCar
-    // BuyUsedCar
+    std::unique_ptr<Car> SellCar();
+    void BuyUsedCar(Driver* d);
 
     void Go();
 

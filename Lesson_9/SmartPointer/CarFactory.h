@@ -1,5 +1,5 @@
 #pragma once
-class Car{};
+#include "Car.h"
 
 class CarFactory
 {
