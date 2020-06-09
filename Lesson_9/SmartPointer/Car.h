@@ -5,6 +5,7 @@
 #include <vector>
 #include <Windows.h>
 #include <thread>
+#include <ctime>
 
 class Car
 {

@@ -4,6 +4,7 @@ void Go(Driver* driver)
 {
     while (true)
     {
+        unsigned int start = clock();
         if (driver->GetCar() != nullptr)
         {
             std::cout << driver->GetName() << " I have a car ";
@@ -14,6 +15,15 @@ void Go(Driver* driver)
             std::cout << driver->GetName() << ": I'll go on foot\n";
         }
         Sleep(1000);
+        unsigned int end = clock();
+        if ((end - start) > 10000)
+        {
+            driver->BuyCar("(b/y)red");
+        }
+        else if ((end - start) > 15000)
+        {
+            driver->BuyCar("green");
+        }
     }
 }
 

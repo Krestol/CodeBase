@@ -4,7 +4,7 @@ void StartSchool(AutoSchool* school)
 {
 	while (true)
 	{
-		Sleep(3000);
+		Sleep(5000);
 		Driver* driver = new Driver("Bob #" + std::to_string(school->IncrProd()), school->GetFactory());
 		DriverManager* manager = *school->GetManager();
 		manager->AddDriver(driver);
