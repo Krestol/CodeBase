@@ -5,13 +5,12 @@ class DriverManager
 {
 public:
 	DriverManager();
-	void AddDriver(Driver* driver);
+	void AddDriver(std::shared_ptr<Driver> driver);
 	void StartDriver();
-	std::thread* GetThread();
 	HANDLE GetEvent();
 private:
 	HANDLE g_event_;
-	std::vector<Driver*> drivers_;
-	std::unique_ptr<std::thread*> thread_;
+	std::vector<std::shared_ptr<Driver>> drivers_;
+	std::unique_ptr<std::thread> thread_;
 };
 

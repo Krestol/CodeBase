@@ -5,18 +5,16 @@ void StartSchool(AutoSchool* school)
 	while (true)
 	{
 		Sleep(5000);
-		Driver* driver = new Driver("Bob #" + std::to_string(school->IncrProd()), school->GetFactory());
-		DriverManager* manager = *school->GetManager();
-		manager->AddDriver(driver);
+		std::shared_ptr<Driver> driver = std::make_shared<Driver>("Bob #" + std::to_string(school->IncrProd()), school->GetFactory());
+		school->GetManager()->AddDriver(driver);
 	}
 }
 
 AutoSchool::AutoSchool(std::shared_ptr<DriverManager> manager, std::shared_ptr<CarFactory> factory) :
-	factory_(factory)
+	factory_(factory),
+	manager_(manager)
 {
-	DriverManager* tmp = &*manager;
-	manager_ = std::make_shared<DriverManager*>(tmp);
-	thread_ = std::make_unique<std::thread*>(new std::thread(StartSchool, this));
+	thread_ = std::make_unique<std::thread>(StartSchool, this);
 }
 
 std::shared_ptr<CarFactory> AutoSchool::GetFactory()
@@ -24,7 +22,7 @@ std::shared_ptr<CarFactory> AutoSchool::GetFactory()
 	return factory_;
 }
 
-std::shared_ptr<DriverManager*> AutoSchool::GetManager()
+std::shared_ptr<DriverManager> AutoSchool::GetManager()
 {
 	return manager_;
 }
