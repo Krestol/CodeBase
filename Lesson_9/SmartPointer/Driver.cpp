@@ -9,6 +9,11 @@ Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
 {
 }
 
+Driver::~Driver() 
+{
+    /*to avoid errors from incomplete type in unique_ptr*/
+}
+
 void Driver::BuyCar(const std::string& color)
 {
     car_ = factory_->BuildCar(color);
@@ -16,7 +21,7 @@ void Driver::BuyCar(const std::string& color)
 
 std::unique_ptr<Car> Driver::SellCar()
 {
-    return std::make_unique<Car>(car_.release());
+    return std::unique_ptr<Car>(car_.release());
 }
 
 void Driver::BuyUsedCar(Driver * d)

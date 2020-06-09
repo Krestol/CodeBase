@@ -1,11 +1,12 @@
 #pragma once
-#include "Car.h"
+class Car;
 class CarFactory;
 
 class Driver
 {
 public:
     Driver(const std::string& name, std::shared_ptr<CarFactory> factory);
+    ~Driver();
 
     void BuyCar(const std::string& color);
 
