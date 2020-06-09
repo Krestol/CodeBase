@@ -1,71 +1,10 @@
 #include <iostream>
 #include <string>
 #include <memory>
-//fake changes
+#include "Car.h"
+#include "CarFactory.h"
+#include "Driver.h"
 
-class Car
-{
-public:
-    Car(const std::string& color)
-    : color_(color)
-    {
-        std::cout << color_ << " car has been created\n";
-    }
-    ~Car() { std::cout << color_ << " car has been destroied\n"; }
-
-    void Drive()
-    {
-        std::cout << color_ << " car in move\n";
-    }
-
-private:
-    std::string color_;
-};
-
-class CarFactory
-{
-public:
-    std::unique_ptr<Car> BuildCar(const std::string& color)
-    {
-        return std::unique_ptr<Car>(new Car(color));
-    }
-};
-
-class Driver
-{
-public:
-    Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
-        : factory_(factory)
-        , name_(name)
-    {
-    }
-
-    void BuyCar(const std::string& color)
-    {
-        car_ = factory_->BuildCar(color);
-    }
-
-    // SellCar
-    // BuyUsedCar
-
-    void Go()
-    {
-        if (car_ != nullptr)
-        {
-            std::cout << name_ << " I have a car ";
-            car_->Drive();
-        }
-        else
-        {
-            std::cout << name_ << ": I'll go on foot\n";
-        }
-    }
-
-private:
-    std::unique_ptr<Car> car_;
-    std::shared_ptr<CarFactory> factory_;
-    std::string name_;
-};
 
 int main()
 {

@@ -151,7 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="CarFactory.cpp" />
+    <ClCompile Include="Driver.cpp" />
     <ClCompile Include="SmartPointer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Car.h" />
+    <ClInclude Include="CarFactory.h" />
+    <ClInclude Include="Driver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
