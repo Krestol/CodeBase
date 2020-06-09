@@ -9,7 +9,16 @@ int main()
     std::shared_ptr<CarFactory> factory(new CarFactory());
     Driver driver1("Bob", factory);
     driver1.Go();
-
+    driver1.BuyCar("red");
+    driver1.Go();
+    driver1.CellCar();
+    driver1.Go();
+    driver1.BuyCar("green");
+    Driver driver2("Jim", factory);
+    driver2.Go();
+    driver2.BuyUsedCar(&driver1);
+    driver2.Go();
+    /*
     driver1.BuyCar("red");
     driver1.Go();
 
@@ -24,8 +33,6 @@ int main()
     driver2.Go();
 
     driver2.BuyCar("blue");
-    driver2.Go();
-
-
+    driver2.Go();*/
     return 0;
 }
