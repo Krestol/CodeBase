@@ -147,19 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Autoschool.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CarFactory.cpp" />
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="DriverManager.cpp" />
-    <ClCompile Include="School.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
     <ClInclude Include="CarFactory.h" />
     <ClInclude Include="Driver.h" />
     <ClInclude Include="DriverManager.h" />
-    <ClInclude Include="School.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
