@@ -17,8 +17,6 @@ public:
     void BuyCar(const std::string& color);
     WhatCar* GetWhatCar();
     bool GetWorkStatus();
-    bool IfReady();
-    void ReadyToSell();
     std::unique_ptr<Car> SellCar();
     void BuyUsedCar(std::shared_ptr<Driver> driver);
     void Start();
@@ -29,5 +27,4 @@ private:
     std::string name_;
     WhatCar whatCar_;
     bool work_;
-    bool readyToSale_;
 };

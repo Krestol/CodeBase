@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "AutoSchool.h"
 
 void StartSchool(AutoSchool* school)

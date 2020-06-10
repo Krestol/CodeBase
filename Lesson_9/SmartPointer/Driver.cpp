@@ -1,9 +1,5 @@
+#include "stdafx.h"
 #include "Driver.h"
-
-void Go(Driver* driver)
-{
-    
-}
 
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
     : factory_(factory)
@@ -11,7 +7,9 @@ Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
 {
     whatCar_ = WhatCar::NoCar;
     work_ = false;
-    readyToSale_ = false;
+    std::unique_ptr<Car> carToSale_ = nullptr;
+    std::unique_ptr<Car> car_ = nullptr;
+    Car* tmp = &*car_;
 }
 
 std::string Driver::GetName()
@@ -21,6 +19,10 @@ std::string Driver::GetName()
 
 void Driver::BuyCar(const std::string& color)
 {
+    if (car_ != nullptr)
+    {
+        carToSale_ = std::move(car_);
+    }
     car_ = factory_->BuildCar(color);
 }
 
@@ -34,26 +36,14 @@ bool Driver::GetWorkStatus()
     return work_;
 }
 
-bool Driver::IfReady()
-{
-    return readyToSale_;
-}
-
-void Driver::ReadyToSell()
-{
-    carToSale_ = std::move(car_);
-
-}
-
 std::unique_ptr<Car> Driver::SellCar()
 {
     return std::unique_ptr<Car>(carToSale_.release());
-    BuyCar("green");
 }
 
 void Driver::BuyUsedCar(std::shared_ptr<Driver> driver)
 {
-    if (driver != nullptr)
+    if (driver != NULL)
     {
         car_ = std::move(driver->SellCar());
     }
@@ -61,17 +51,24 @@ void Driver::BuyUsedCar(std::shared_ptr<Driver> driver)
 
 void Driver::Start()
 {
+    uint32_t timeToByBY = 5000;
+    uint32_t timeToByNew = 10000;
     work_ = true;
-    unsigned int start = clock();
+    uint32_t start = clock();
     while (true)
     {
-        unsigned int end = clock();
-        if ((end - start) > 5000 && whatCar_ == WhatCar::NoCar)
+        uint32_t end = clock();
+        uint32_t curTimeWork = end - start;
+        if ((curTimeWork) > timeToByBY && (curTimeWork) < timeToByNew && whatCar_ == WhatCar::NoCar)
         {
-            this->BuyCar("(b/y)red");
-            whatCar_ = WhatCar::BY;
+            std::shared_ptr<Driver> driver;
+            if (driver != NULL)
+            {
+                this->BuyUsedCar(driver);
+                whatCar_ = WhatCar::BY;
+            }
         }
-        else if ((end - start) > 10000 && whatCar_ == WhatCar::BY)
+        else if ((curTimeWork) > timeToByNew && whatCar_ != WhatCar::New)
         {
             this->BuyCar("green");
             whatCar_ = WhatCar::New;
