@@ -1,7 +1,7 @@
+#include "stdafx.h"
 #include "CarFactory.h"
 #include "Car.h"
 #include "Driver.h"
-#include "stdafx.h"
 
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
     : factory_(factory)
