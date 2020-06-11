@@ -3,15 +3,23 @@
 #include "Driver.h"
 #include "CarFactory.h"
 #include "Car.h"
+#include "DriverManager.h"
+#include "autoschool.h"
 
 int main()
 {
     std::shared_ptr<CarFactory> factory(new CarFactory());
+    autoschool mySchool(10, "Ivan",factory);
+    std::thread th(&autoschool::threadfuct, &mySchool);
+    th.join();
+    mySchool.showDrivers();
+      
+    /*
     Driver driver1("Bob", factory);
     driver1.Go();
     driver1.BuyCar("red");
     driver1.Go();
-    driver1.CellCar();
+    driver1.SellCar();
     driver1.Go();
     driver1.BuyCar("green");
     Driver driver2("Jim", factory);

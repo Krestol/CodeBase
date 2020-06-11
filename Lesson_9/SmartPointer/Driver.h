@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+
 #include "Driver.h"
 #include "CarFactory.h"
 #include "Car.h"
@@ -10,7 +10,7 @@ public:
     Driver(const std::string& name, std::shared_ptr<CarFactory> factory);
     void BuyCar(const std::string& color);
     void BuyUsedCar(Driver* d);
-    std::unique_ptr<Car> CellCar();
+    std::unique_ptr<Car> SellCar();
     void Go();
 private:
     std::unique_ptr<Car> car_;

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Car.h"
 
 
 Car::Car(const std::string& color)

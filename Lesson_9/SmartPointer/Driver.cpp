@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include "Car.h"
+#include "CarFactory.h"
+#include "Driver.h"
 
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
     : factory_(factory)
@@ -23,9 +26,9 @@ void Driver::Go()
 }
 void Driver::BuyUsedCar(Driver* d)
 {
-     car_ = d->CellCar();
+     car_ = d->SellCar();
 }
-std::unique_ptr<Car> Driver::CellCar()
+std::unique_ptr<Car> Driver::SellCar()
 {
     return std::unique_ptr<Car> (car_.release());
 }
