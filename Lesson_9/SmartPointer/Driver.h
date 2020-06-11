@@ -8,8 +8,9 @@ public:
     Driver(const std::string& name, std::shared_ptr<CarFactory> factory);
     void BuyCar(const std::string& color);
 
-    // SellCar
-    // BuyUsedCar
+    std::unique_ptr<Car> SellCar();
+    
+    void BuyUsedCar(Driver* d);
 
     void Go();
 

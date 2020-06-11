@@ -14,8 +14,15 @@ void Driver::BuyCar(const std::string& color)
         car_ = factory_->BuildCar(color);
     }
 
-    // SellCar
-    // BuyUsedCar
+std::unique_ptr<Car> Driver::SellCar()
+{
+    return std::unique_ptr<Car>(car_.release());
+};
+    
+void Driver::BuyUsedCar(Driver* d)
+{    
+    d->SellCar();
+}
 
 void Driver::Go()
     {
