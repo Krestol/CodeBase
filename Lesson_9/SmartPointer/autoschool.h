@@ -1,13 +1,16 @@
 #pragma once
-
+#include "CarFactory.h"
+#include "Driver.h"
+#include "Car.h"
+#include "DriverManager.h"
 class autoschool
 {
 public:
-    autoschool(int numbersOfDrivers, std::string name, std::shared_ptr<CarFactory> factory);
+    autoschool(int numbersOfDrivers, std::string name, std::shared_ptr<CarFactory>& factory);
     void threadfuct();
     void showDrivers();
-    
-private:
+    void showDriversofManagers();
+ private:
     int numbersOfDrivers_;
     std::string name_;
     std::shared_ptr<CarFactory> factory_;

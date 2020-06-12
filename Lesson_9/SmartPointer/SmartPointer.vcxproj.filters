@@ -47,10 +47,10 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="autoschool.h">
+    <ClInclude Include="DriverManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DriverManager.h">
+    <ClInclude Include="autoschool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

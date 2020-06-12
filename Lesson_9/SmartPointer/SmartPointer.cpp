@@ -5,15 +5,24 @@
 #include "Car.h"
 #include "DriverManager.h"
 #include "autoschool.h"
+//-----
+#include <iostream>
+#include <string>
+#include <memory>
+#include <vector>
+#include <thread>
+#include <chrono>
 
 int main()
 {
+   
     std::shared_ptr<CarFactory> factory(new CarFactory());
     autoschool mySchool(10, "Ivan",factory);
     std::thread th(&autoschool::threadfuct, &mySchool);
     th.join();
-    mySchool.showDrivers();
-      
+    //mySchool.showDrivers();
+    mySchool.showDriversofManagers();
+ 
     /*
     Driver driver1("Bob", factory);
     driver1.Go();
