@@ -10,6 +10,16 @@ autoschool::autoschool(int numbersOfDrivers, std::string name, std::shared_ptr<C
 {
     DriversInAutoschool_.clear();
 }
+    void autoschool::getName(const int& i)
+    {
+        if (i == 3)
+            name_ = "Brandon Lee";
+        else if (i == 2)
+            name_ = "Bruce Lee";
+        else if (i == 1)
+            name_ = "Jackie Chan";
+        else name_ = "Arnold Schwarzenegger";
+    }
 void autoschool::threadfuct()
 {
     for (int i = 0; i < numbersOfDrivers_; i++)
@@ -19,6 +29,7 @@ void autoschool::threadfuct()
         //std::unique_ptr < Driver> currentDriver(new Driver("Ivan", factory_));
         //DriversInAutoschool_.push_back(std::move(currentDriver));
         //secondway: same but less code
+        getName(i);
         DriversInAutoschool_.push_back(std::make_unique < Driver>(name_, factory_));
         //2) Create Managers - inside DriverSchool(autoschool):
         DriverManagers_.push_back(std::make_unique <DriverManager>("Stepan", factory_));
@@ -28,10 +39,11 @@ void autoschool::threadfuct()
     {
         DriverManagers_[i]->GetOneDriver(std::move(std::unique_ptr<Driver>(DriversInAutoschool_[i].release())));
     }
-    //4)Everybody DriverManager strat Go for his Driver (OneDriver) in thread
-    for (int i = 0; i < numbersOfDrivers_; i++)
+    //4)Everybody DriverManager start Go for his Driver (OneDriver) in thread
+   for (int i = 0; i < numbersOfDrivers_; i++)
     {
         DriverManagers_[i]->startThread();
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     }
 }
 

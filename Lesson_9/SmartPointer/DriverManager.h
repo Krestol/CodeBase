@@ -16,4 +16,3 @@ private:
     std::vector<std::unique_ptr<Driver>> ManagerDrivers_;
     std::unique_ptr<Driver> OneDriver_;
 };
-

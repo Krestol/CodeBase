@@ -15,14 +15,14 @@
 
 int main()
 {
-   
+    
     std::shared_ptr<CarFactory> factory(new CarFactory());
     autoschool mySchool(10, "Ivan",factory);
-    std::thread th(&autoschool::threadfuct, &mySchool);
-    th.join();
+    std::thread thp(&autoschool::threadfuct, &mySchool);
+    
+    thp.join();
     //mySchool.showDrivers();
-    mySchool.showDriversofManagers();
- 
+    //mySchool.showDriversofManagers();
     /*
     Driver driver1("Bob", factory);
     driver1.Go();

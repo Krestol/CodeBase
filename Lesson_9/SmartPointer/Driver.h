@@ -11,8 +11,6 @@ public:
     std::unique_ptr<Car> SellCar();
     void Go();
     void ShowDriverInfo();
-    void operator()(std::unique_ptr < Driver>);
-    
 private:
     std::unique_ptr<Car> car_;
     std::shared_ptr<CarFactory> factory_;

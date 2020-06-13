@@ -36,10 +36,4 @@ void Driver::ShowDriverInfo()
 {
     std::cout<< name_<<std::endl;// << "car adress: " << this->car_ << std::endl;
 }
-void Driver::operator()(std::unique_ptr < Driver> dr)
-{
-    //Driver* currentD = dr.get();
-    dr->Go();
-    this->Go();
-}
 

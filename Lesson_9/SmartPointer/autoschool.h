@@ -10,7 +10,8 @@ public:
     void threadfuct();
     void showDrivers();
     void showDriversofManagers();
- private:
+    void getName(const int& i);
+private:
     int numbersOfDrivers_;
     std::string name_;
     std::shared_ptr<CarFactory> factory_;
