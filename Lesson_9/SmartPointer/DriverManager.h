@@ -1,7 +1,7 @@
 #pragma once
 #include "Driver.h"
-#include "CarFactory.h"
-#include "Car.h"
+
+
 class DriverManager
 {
 public:
@@ -10,9 +10,10 @@ public:
     void ShowOneDriver();
     void startThread();
     void ThreaFunctionManager();
+    //void AdviceDriverToBuyCar(autoschool& CurrentSchool);
 private:
     std::string nameManager_;
     std::shared_ptr<CarFactory> factory_;
-    std::vector<std::unique_ptr<Driver>> ManagerDrivers_;
+    std::vector<std::unique_ptr<Driver>> DriversOwnedByManagers_;
     std::unique_ptr<Driver> OneDriver_;
 };

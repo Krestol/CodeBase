@@ -1,6 +1,6 @@
+#pragma once
 #include "stdafx.h"
 #include "Car.h"
-
 
 Car::Car(const std::string& color)
     : color_(color)

@@ -1,6 +1,9 @@
 #pragma once
-#include "Car.h"
+
 #include "CarFactory.h"
+#include "Car.h"
+#include "autoschool.h"
+
 
 class Driver
 {
@@ -11,9 +14,12 @@ public:
     std::unique_ptr<Car> SellCar();
     void Go();
     void ShowDriverInfo();
+    bool HaveCar();
+    int isDriverToBuy(autoschool& currentSchool);
 private:
     std::unique_ptr<Car> car_;
     std::shared_ptr<CarFactory> factory_;
     std::string name_;
+    
 };
 
