@@ -2,8 +2,8 @@
 
 #include "CarFactory.h"
 #include "Car.h"
-#include "autoschool.h"
-
+class DriverManager;
+class autoschool;
 
 class Driver
 {
@@ -15,11 +15,19 @@ public:
     void Go();
     void ShowDriverInfo();
     bool HaveCar();
-    int isDriverToBuy(autoschool& currentSchool);
-private:
+    void cleverGo();
+    std::vector<int> canIbuyUsedCar();
+    std::vector<int> AdviseDriverFromManagerToBuyCar();
+    void rememberMyManager(DriverManager* myM);
+    DriverManager* sayNameMyManager();
+    void rememberMySchool(autoschool* myS);
+    autoschool* sayNameMySchool();
+ private:
     std::unique_ptr<Car> car_;
     std::shared_ptr<CarFactory> factory_;
     std::string name_;
+    DriverManager* myManager_;
+    autoschool* mySchool_;
     
 };
 

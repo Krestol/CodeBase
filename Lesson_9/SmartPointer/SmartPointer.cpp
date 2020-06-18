@@ -8,9 +8,10 @@
 int main()
 {
     std::shared_ptr<CarFactory> factory(new CarFactory());
-    autoschool mySchool(4, "Ivan",factory);
+    autoschool mySchool(2, 2, "Ivan",factory);
     std::thread thp(&autoschool::threadfuct, &mySchool);
     thp.join();
+   
     //mySchool.showDrivers();
     //mySchool.showDriversofManagers();
     /*
