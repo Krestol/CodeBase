@@ -11,5 +11,5 @@ Car::~Car()
 { std::cout << color_ << " car has been destroied\n"; }
 void Car::Drive()
 {
-    std::cout << color_ << " car in move\n";
+    std::cout << ": "<< color_ << " car in move\n\n";
 }

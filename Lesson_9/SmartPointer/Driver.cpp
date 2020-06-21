@@ -5,57 +5,85 @@
 #include "Car.h"
 #include "CarFactory.h"
 #include "autoschool.h"
+
 std::mutex mtx;
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
     : factory_(factory)
-    , name_(name),
-    myManager_(nullptr)
+    , name_(name)
 {}
 void Driver::BuyCar(const std::string& color)
 {
     car_ = factory_->BuildCar(color);
+    std::cout << "I bought a new car\n";
+    myManager_->GetPtrDriverWithCar(this);
 }
-void Driver::Go()
+
+void Driver::cleverGo()
 {
-    //mtx.lock();   //it was like this before the cleverGo();
-    if (car_ != nullptr)
+    //int whatToDo = rand() % 3 + 1;//dont work with threads
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(1, 2);
+    int random_number = distrib(gen);
+    std::lock_guard<std::mutex> locked(mtx);
+    if (car_ != nullptr)    //if driver has car - drive
     {
-            std::cout << name_ << " I have a car ";
-            car_->Drive();
+        std::cout << name_ << " have a car";
+        car_->Drive();
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     }
     else
     {
-            std::cout << name_ << ": I'll go on foot\n";
+        std::cout << name_ << "'ll go on foot.... BUT....";
+        switch (random_number)
+        {
+            case 1: //buy a new car
+            {
+                this->BuyCar(this->SetCarColor());
+                this->Go();
+                break;
+            }
+            case 2://try to buy used car
+            {
+                try
+                {
+                    Driver* p_driverWithCar = myManager_->GivePtrDriverWithCar();
+                    this->BuyUsedCar(p_driverWithCar);
+                    //this->BuyUsedCar(myManager_->GivePtrDriverWithCar()); //same as the two lines above
+                }
+                catch (const std::runtime_error& e)
+                {
+                    std::cout << e.what();
+                }
+                break;
+            }
+
+        }
     }
-    ///mtx.unlock();    //it was like this before the cleverGo();
+}
+void Driver::Go()//already dont use in prog
+{
+    //std::lock_guard<std::mutex> locked(mtx);
+    if (car_ != nullptr)
+    {
+            std::cout << name_ << " have a car";
+            car_->Drive();
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+    else
+    {
+            std::cout << name_ << " : I'll go on foot\n";
+    }
 }
 void Driver::BuyUsedCar(Driver* d)
 {
      car_ = d->SellCar();
+     std::cout << "I bought a used car\n";
+     myManager_->GetPtrDriverWithCar(this);
 }
 std::unique_ptr<Car> Driver::SellCar()
 {
-    return std::make_unique<Car> (car_.release());
-}
-void Driver::ShowDriverInfo()
-{
-    std::cout<< name_<<std::endl;// << "car adress: " << this->car_ << std::endl;
-}
-bool Driver::HaveCar()
-{
-    if (car_ == nullptr)
-    {
-        return false; // no car
-    }
-    else
-    {
-        return true; //have car
-    }
-}
-std::vector<int> Driver::canIbuyUsedCar()
-{
-    std::vector <int> temp = myManager_->isDriverToBuyCarFromAllManagers_m(mySchool_);
-    return temp;
+    return std::unique_ptr<Car> (car_.release());
 }
 void Driver::rememberMyManager(DriverManager* myM)
 {
@@ -73,33 +101,19 @@ autoschool* Driver::sayNameMySchool()
 {
     return this->mySchool_;
 }
-void Driver::cleverGo()
+Driver* Driver::giveDriverToBuyCar()
 {
-    int i = 100;
-    while (i)
-    {
-        mtx.lock();
-        //std::lock_guard<std::mutex>lock(mtx);
-        this->Go();
-        bool probaPera = this->HaveCar();
-        if (!this->HaveCar())
-        {
-            std::vector<int > temp = this->canIbuyUsedCar();
-            int y = temp.empty();
-            if (temp.empty())//If temp.empty==1 than meens temp is empty 
-                this->BuyCar("red");//if haven't drivers with car buy new car from factory
-            else
-            {
-                //car_ = std::move(mySchool_->giveUsedCarFromDriversOwnedManagers(temp));
-                std::cout << std::endl << "Get Ready!" << std::endl;
-                //this->BuyUsedCar();
-                //line below doesn't work
-                //car_ = mySchool_->giveUsedCarFromDriversOwnedManagers(temp);//you should work with metods not fields
-                std::cout << "It works! - to buy car!";
-            }
-        }
-        mtx.unlock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        i--;
-    }
+    return myManager_->GivePtrDriverWithCar();
+}
+std::string Driver::SetCarColor()
+{
+    if (name_ == "Sergey")
+        return "green";
+    else if (name_ == "Ivan")
+        return "blue";
+    else if (name_ == "Sasha")
+        return "black";
+    else if (name_ == "Masha")
+        return "red";
+    else return "silver";
 }

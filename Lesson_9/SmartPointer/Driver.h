@@ -13,21 +13,20 @@ public:
     void BuyUsedCar(Driver* d);
     std::unique_ptr<Car> SellCar();
     void Go();
-    void ShowDriverInfo();
-    bool HaveCar();
     void cleverGo();
     std::vector<int> canIbuyUsedCar();
-    std::vector<int> AdviseDriverFromManagerToBuyCar();
     void rememberMyManager(DriverManager* myM);
     DriverManager* sayNameMyManager();
     void rememberMySchool(autoschool* myS);
     autoschool* sayNameMySchool();
- private:
+    Driver* giveDriverToBuyCar();
+    std::string SetCarColor();
+    int intRand(const int& min, const int& max);
+private:
     std::unique_ptr<Car> car_;
     std::shared_ptr<CarFactory> factory_;
     std::string name_;
     DriverManager* myManager_;
     autoschool* mySchool_;
-    
 };
 

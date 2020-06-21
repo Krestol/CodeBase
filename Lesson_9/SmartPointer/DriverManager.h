@@ -7,17 +7,16 @@ class DriverManager
 public:
     DriverManager(const std::string& nameManager, std::shared_ptr<CarFactory>& factory);
     void GetOneDriver(std::unique_ptr<Driver> CurrentDriver);
-    void ShowOneDriver();
     void startThread();
-    void ThreaFunctionManager();
-    std::vector <int> isDriverToBuyCarFromAllManagers_m(autoschool* currentSchool);
-    int isDriverToBuyCarFromMe_m();
-    void setFiledManagerToOnedDrivers(int k);
-    std::unique_ptr<Car> tellDriverTosellCar(int index);
+    void ThreaFunctionManager(int DriverNumber);
+    void setFieldManagerToOnedDrivers(int k);
+    void GetPtrDriverWithCar(Driver* NewDriverWhitCar);
+    Driver* GivePtrDriverWithCar();
+
 private:
     std::string nameManager_;
     std::shared_ptr<CarFactory> factory_;
     std::vector<std::unique_ptr<Driver>> DriversOwnedByManagers_;
-    std::unique_ptr<Driver> OneDriver_;//artefact
-    static int NumberOfManagers;
+    static int NumberOfManagers;//TODO подумать что с этим решить
+    std::vector<Driver*> PtrDriversWithCar_;
 };
