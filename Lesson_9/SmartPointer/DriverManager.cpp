@@ -1,4 +1,4 @@
-#pragma once
+
 #include "stdafx.h"
 #include "DriverManager.h"
 #include "CarFactory.h"
@@ -29,15 +29,9 @@ void DriverManager::ThreaFunctionManager(int DriverNumber)
 }
 void DriverManager::startThread()
 {
-    
-    
     std::vector<std::thread> threads;
     for (unsigned currentDriverNumber = 0; currentDriverNumber < DriversOwnedByManagers_.size(); ++currentDriverNumber)
     {
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(1, 3);
-        distrib(gen);
         threads.push_back(std::thread(&DriverManager::ThreaFunctionManager, this, currentDriverNumber));
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
@@ -50,12 +44,15 @@ void DriverManager::setFieldManagerToOnedDrivers(int k)
 {
     DriversOwnedByManagers_[k]->rememberMyManager(this);
 }
+std::mutex mtx;
 void DriverManager::GetPtrDriverWithCar(Driver* NewDriverWhitCar)
 {
+    std::lock_guard<std::mutex> locked(mtx);
     PtrDriversWithCar_.push_back(NewDriverWhitCar);
 }
 Driver* DriverManager::GivePtrDriverWithCar()
 {
+    std::lock_guard<std::mutex> locked(mtx);
     if (PtrDriversWithCar_.empty())
     {
         throw std::runtime_error ("...tried to buy a used car but they aren’t\n");

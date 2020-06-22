@@ -1,4 +1,4 @@
-#pragma once
+
 #include "stdafx.h"
 #include "Driver.h"
 #include "DriverManager.h"
@@ -6,7 +6,7 @@
 #include "CarFactory.h"
 #include "autoschool.h"
 
-std::mutex mtx;
+
 Driver::Driver(const std::string& name, std::shared_ptr<CarFactory> factory)
     : factory_(factory)
     , name_(name)
@@ -25,7 +25,7 @@ void Driver::cleverGo()
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(1, 2);
     int random_number = distrib(gen);
-    std::lock_guard<std::mutex> locked(mtx);
+    
     if (car_ != nullptr)    //if driver has car - drive
     {
         std::cout << name_ << " have a car";
@@ -40,7 +40,8 @@ void Driver::cleverGo()
             case 1: //buy a new car
             {
                 this->BuyCar(this->SetCarColor());
-                this->Go();
+                std::cout << name_ << " have a car";
+                car_->Drive();
                 break;
             }
             case 2://try to buy used car
@@ -59,20 +60,6 @@ void Driver::cleverGo()
             }
 
         }
-    }
-}
-void Driver::Go()//already dont use in prog
-{
-    //std::lock_guard<std::mutex> locked(mtx);
-    if (car_ != nullptr)
-    {
-            std::cout << name_ << " have a car";
-            car_->Drive();
-            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-    }
-    else
-    {
-            std::cout << name_ << " : I'll go on foot\n";
     }
 }
 void Driver::BuyUsedCar(Driver* d)

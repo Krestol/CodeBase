@@ -1,4 +1,4 @@
-#pragma once
+
 #include "stdafx.h"
 #include "CarFactory.h"
 #include "Car.h"
